@@ -36,7 +36,7 @@ function ClientMainPage({
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
       <CreateResume canCreate={canCreate} />
       <div className="flex items-center gap-5">
-        {resumes && (
+        {resumes.length > 0 && (
           <div>
             {resumes.map((resume, index) => (
               <ResumeMenu resume={resume} key={resume.id} />

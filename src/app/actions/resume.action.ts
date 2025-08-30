@@ -9,7 +9,7 @@ import { getCurrentUserId } from "./auth.actions";
 
 export const fetchAllResume = async () => {
   const userId = await getCurrentUserId();
-  if (!userId) return;
+  if (!userId) return []
   try {
     const resumes = await prisma.resume.findMany({
       where: {
