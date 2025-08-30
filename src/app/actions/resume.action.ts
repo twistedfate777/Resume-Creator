@@ -8,14 +8,14 @@ import { redirect } from "next/navigation";
 import { getCurrentUserId } from "./auth.actions";
 
 export const fetchAllResume = async () => {
-  const userId = await getCurrentUserId()
-  if(!userId) return
+  const userId = await getCurrentUserId();
+  if (!userId) return;
   try {
     const resumes = await prisma.resume.findMany({
-      where:{
-        userId : userId
-      }
-      ,include: {
+      where: {
+        userId: userId,
+      },
+      include: {
         educationExperiences: true,
         workExperiences: true,
       },
