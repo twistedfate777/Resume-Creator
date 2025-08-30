@@ -5,11 +5,17 @@ import { convertToResumeValues, ResumeValues } from "@/lib/validation";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getCurrentUserId } from "./auth.actions";
 
 export const fetchAllResume = async () => {
+  const userId = await getCurrentUserId()
+  if(!userId) return
   try {
     const resumes = await prisma.resume.findMany({
-      include: {
+      where:{
+        userId : userId
+      }
+      ,include: {
         educationExperiences: true,
         workExperiences: true,
       },
