@@ -15,17 +15,16 @@ function ClientMainPage({
   resumes: Resumes;
   resumesCount: number;
 }) {
-  const { subscriptionLevel, fetchSubscribtionLevel, userId ,fetchUserId} =
+  const { subscriptionLevel, fetchSubscribtionLevel, userId, fetchUserId } =
     usePremiumStore();
 
   useEffect(() => {
-    
     const fetchSubscribtion = async () => {
-      await fetchUserId()
-      if (userId) await fetchSubscribtionLevel(userId)
+      await fetchUserId();
+      if (userId) await fetchSubscribtionLevel(userId);
     };
     fetchSubscribtion();
-  }, [userId, fetchSubscribtionLevel,fetchUserId]);
+  }, [userId, fetchSubscribtionLevel, fetchUserId]);
 
   let canCreate = false;
 
@@ -37,9 +36,13 @@ function ClientMainPage({
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
       <CreateResume canCreate={canCreate} />
       <div className="flex items-center gap-5">
-        {resumes.map((resume, index) => (
-          <ResumeMenu resume={resume} key={resume.id} />
-        ))}
+        {resumes && (
+          <div>
+            {resumes.map((resume, index) => (
+              <ResumeMenu resume={resume} key={resume.id} />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
