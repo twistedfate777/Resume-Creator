@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { fetchAllResume } from "../actions/resume.action";
 import { usePremiumStore } from "@/hooks/usePremiumDialog";
 import { useAuth, useUser } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
 
 type Resumes = Awaited<ReturnType<typeof fetchAllResume>>;
 
@@ -37,7 +38,7 @@ function ClientMainPage({
       <CreateResume canCreate={canCreate} />
       <div className="flex items-center gap-5">
         {resumes.length > 0 && (
-          <div>
+          <div className="flex gap-4">
             {resumes.map((resume, index) => (
               <ResumeMenu resume={resume} key={resume.id} />
             ))}

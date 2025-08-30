@@ -3,12 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import logo from "../assets/logo.png";
-import { UserButton, useUser } from "@clerk/nextjs";
+import {
+  SignIn,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import { CreditCard } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { dark } from "@clerk/themes";
 import { usePremiumStore } from "@/hooks/usePremiumDialog";
+import { Button } from "./ui/button";
 
 function Navbar() {
   const { theme } = useTheme();
@@ -35,6 +42,16 @@ function Navbar() {
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
+          {user ? (
+            <SignOutButton>
+              <Button>Log out</Button>
+            </SignOutButton>
+          ) : (
+            <SignInButton>
+              <Button>Login</Button>
+            </SignInButton>
+          )}
+
           <UserButton
             appearance={{
               baseTheme: theme === "dark" ? dark : undefined,
